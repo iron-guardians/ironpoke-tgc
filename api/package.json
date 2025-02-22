@@ -17,6 +17,7 @@
     "errors": "^0.3.0",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
+    "morgan": "^1.10.0",
     "nodemon": "^3.1.9"
   }
 }
