@@ -77,7 +77,7 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     }
 }, {
-    timeStamps: true,
+    timestamps: true,
     toJSON: {
         transform: function (doc, ret) {
             delete ret.__v;

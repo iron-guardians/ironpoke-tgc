@@ -3,11 +3,17 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const createError = require("http-errors");
 
-const users = require("./users.model");
-const cards = require("./cards.model");
-const boosterPacks = require("./booster-packs.model");
-const cardSets = require("./card-sets.model");
-const collections = require("./collections.model");
+const users = require("../controllers/users.controller");
+const sessions = require("../controllers/sessions.controller");
+const auth = require("../middlewares/session.middleware");
+
+router.post("/users", users.create);
+router.get("/users/me", auth.isAuthenticated, users.profile);
+router.get("/users/:id/validate", users.validate);
+
+router.post("/sessions", sessions.create);
+router.delete("/sessions", auth.isAuthenticated, sessions.destroy);
+
 
 router.use((req, res, next) => {
     next(createError(404, "Route not found"));

@@ -14,7 +14,7 @@ module.exports.loadSession = expressSession({
         maxAge: sessionMaxDays * 24 * 60 * 60 * 1000
     },
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL,
+        mongoUrl: process.env.MONGODB_URI,
         ttl: sessionMaxDays * 24 * 60 * 60
     })
 });
