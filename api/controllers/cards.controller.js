@@ -1,5 +1,6 @@
 const axios = require("axios");
 const Card = require("../models/card.model");
+const User = require("../models/user.model");
 const BoosterPack = require("../models/booster-packs.model");
 
 module.exports.storeAllCards = async (req, res, next) => {
@@ -102,6 +103,23 @@ module.exports.openBoosterPack = async (req, res, next) => {
       res.status(200).json(cards);
     }
 
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports.getUserCards = async (req, res, next) => {
+  const userId = req.params.id;
+  
+  try {
+    const user = await User.findById(userId);
+    const userCards = [];
+
+    for (const cardId of user.cardsCollection) {
+      const card = await Card.findById(cardId);
+      userCards.push(card);
+    }
+    res.json(userCards);
   } catch (error) {
     next(error);
   }
