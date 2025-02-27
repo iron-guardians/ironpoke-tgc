@@ -5,7 +5,7 @@ const boosterPackSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Booster Pack name is required"],
-        maxLength: [20, "Booster Pack name cannot be longer than 20 characters"],
+        maxLength: [50, "Booster Pack name cannot be longer than 20 characters"],
         trim: true
     },
     description: {
@@ -21,9 +21,8 @@ const boosterPackSchema = new mongoose.Schema({
             return "https://www.only-cards.com/wp-content/uploads/2023/02/Pokemon_TCG_Scarlet_Violet_Booster_Wrap_Paldea_First_Partner_Pokemon_ES-600x1099.png";
         }
     },
-    set: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Set",
+    filter: {
+        type: Object,
         required: [true, "Set is required"]
     },
     prize: {
@@ -32,7 +31,7 @@ const boosterPackSchema = new mongoose.Schema({
         min: [0, "Pack prize cannot be negative"],
         default: 0
     },
-    numberOfCards: {
+    amount: {
         type: Number,
         required: [true, "Number of cards is required"],
         min: [0, "Number of cards cannot be negative"],

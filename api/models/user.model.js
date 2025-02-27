@@ -67,11 +67,11 @@ const userSchema = new mongoose.Schema({
         default: 0,
         min: [0, "Pack prize cannot be negative"],
     },
-    cardsCollection: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "CardsCollection",
-        default: null
-    },
+    cardsCollection: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Card"
+        }],
     lastOpen: {
         type: Date,
         default: Date.now

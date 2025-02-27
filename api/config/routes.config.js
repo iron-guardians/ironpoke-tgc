@@ -6,6 +6,17 @@ const createError = require("http-errors");
 const users = require("../controllers/users.controller");
 const sessions = require("../controllers/sessions.controller");
 const auth = require("../middlewares/session.middleware");
+const cards = require("../controllers/cards.controller");
+const boosterPacks = require("../controllers/booster-packs.controller");
+const cardSets = require("../controllers/card-sets.controller");
+
+router.post("/booster-packs", boosterPacks.create);
+
+router.post("/cards", cards.storeAllCards);
+router.get("/cards/", cards.getCards);
+router.get("/open-booster-pack/:boosterPackId", cards.openBoosterPack);
+
+router.post("/card-sets", cardSets.createAllSets); 
 
 router.post("/users", users.create);
 router.get("/users/me", auth.isAuthenticated, users.profile);
