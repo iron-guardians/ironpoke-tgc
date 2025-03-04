@@ -24,7 +24,7 @@ module.exports.storeAllCards = async (req, res, next) => {
 
 
     for (const card of data) {
-      const existingCard = await Card.findOne({ id: card.id });
+      const existingCard = await Card.findOne({ cardId: card.id });
       if (!existingCard) {
         await Card.create({...card, cardId : card.id});
         console.log(`Stored card: ${card.name}`);
@@ -43,9 +43,9 @@ module.exports.storeAllCards = async (req, res, next) => {
       if (!cards || cards.length === 0) break;
 
       for (const card of cards) {
-        const existingCard = await Card.findOne({ id: card.id });
+        const existingCard = await Card.findOne({ cardId: card.id });
         if (!existingCard) {
-          await Card.create(card);
+          await Card.create({...card, cardId : card.id});
           console.log(`Stored card: ${card.name}`);
         } else {
           console.log(`Card already exists: ${card.name}`);
