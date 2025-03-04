@@ -13,16 +13,21 @@ const cardSets = require("../controllers/card-sets.controller");
 router.post("/booster-packs", boosterPacks.create);
 
 router.post("/cards", cards.storeAllCards);
-router.get("/cards/", cards.getCards);
+router.get("/cards", cards.getCards);
+router.get("/cards/:id", cards.getCards);
+
+
 router.get("/open-booster-pack/:boosterPackId", cards.openBoosterPack);
-router.get("/userCards/:id", auth.isAuthenticated, cards.getUserCards);
+
+router.get("/user-cards", auth.isAuthenticated, cards.getUserCards)
+router.get("/user-cards/:userId?", auth.isAuthenticated, cards.getUserCards);
 
 router.post("/card-sets", cardSets.createAllSets);
 
 router.post("/users", users.create);
 router.get("/users/me", auth.isAuthenticated, users.profile);
 router.get("/users/:id/validate", users.validate);
-router.patch("/users/addCards", auth.isAuthenticated, users.addCards);
+router.patch("/users/add-cards", auth.isAuthenticated, users.addCards);
 
 router.post("/sessions", sessions.create);
 router.delete("/sessions", auth.isAuthenticated, sessions.destroy);

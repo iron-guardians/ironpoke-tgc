@@ -89,7 +89,7 @@ const cardmarketSchema = new mongoose.Schema({
 });
 
 const cardSchema = new mongoose.Schema({
-  id: { type: String, unique: true },
+  cardId: { type: String, unique: true },
   name: String,
   supertype: String,
   subtypes: [String],
@@ -116,8 +116,9 @@ const cardSchema = new mongoose.Schema({
     toJSON: {
         transform: function (doc, ret) {
             delete ret.__v;
+            delete ret._id;
 
-            ret.id = doc.id;
+            ret.id = doc._id;
             return ret;
         }
     }

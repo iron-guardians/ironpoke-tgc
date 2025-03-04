@@ -52,11 +52,6 @@ module.exports.addCards = (req, res, next) => {
         return next(createError(400, "No cards provided"));
     }
 
-    // Check if the user is logged in or authenticated (assuming req.user contains user data)
-    if (!req.user) {
-        return next(createError(401, "Unauthorized"));
-    }
-
     // Find the user by ID
     User.findById(req.user.id)
         .then((user) => {
@@ -65,7 +60,7 @@ module.exports.addCards = (req, res, next) => {
             }
 
             // Push only the 'id' of each card into the user's cards collection
-            const cardIds = cards.map(card => card._id);
+            const cardIds = cards.map(card => card.id);
             user.cardsCollection.push(...cardIds);
 
             return user.save();  // Save the user after modifying the cards collection

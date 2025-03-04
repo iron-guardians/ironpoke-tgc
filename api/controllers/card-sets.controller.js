@@ -7,15 +7,15 @@ module.exports.createAllSets = async (req, res) => {
 
     const response = await axios.get(apiUrl);
 
-    const sets = response.data.data;
+    const sets = response.data;
 
     const savedSets = [];
 
     for (const set of sets) {
-      const existingSet = await CardSet.findOne({ id: set.id });
+      const existingSet = await CardSet.findOne({ setId: set.id });
       if (!existingSet) {
         const newSet = new CardSet({
-          id: set.id,
+          setId: set.id,
           name: set.name,
           series: set.series,
           printedTotal: set.printedTotal,

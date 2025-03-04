@@ -4,7 +4,7 @@ const {isURL} = require("../validators/string.validators");
 // Define the schema for the Card Set
 const cardSetSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true },
+    setId: { type: String, required: true },
     name: { type: String, required: true },
     series: { type: String, required: true },
     printedTotal: { type: Number, required: true },

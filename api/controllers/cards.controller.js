@@ -26,7 +26,7 @@ module.exports.storeAllCards = async (req, res, next) => {
     for (const card of data) {
       const existingCard = await Card.findOne({ id: card.id });
       if (!existingCard) {
-        await Card.create(card);
+        await Card.create({...card, cardId : card.id});
         console.log(`Stored card: ${card.name}`);
       } else {
         console.log(`Card already exists: ${card.name}`);
@@ -62,19 +62,29 @@ module.exports.storeAllCards = async (req, res, next) => {
 };
 
 module.exports.getCards = async (req, res, next) => {
+  console.log(req.params.id)
   try {
     const filter = {};
 
-    if (req.query.set) {
-      filter["set.id"] = req.query.set;
+    if(req.params.id) {
+      filter.cardId = req.params.id; 
     }
 
+    if (req.query.set) {
+      filter["set.id"] = req.query.set;
+    } 
+  
     if (req.query.types) {
       const typesArray = req.query.types.split(",");
       filter.types = { $in: typesArray };
     }
-
+    
     const cards = await Card.find(filter);
+
+    if (!cards.length) {
+      return res.status(404).json({ message: "Cards not found." });
+    }
+
     res.json(cards);
   } catch (error) {
     next(error);
@@ -109,7 +119,8 @@ module.exports.openBoosterPack = async (req, res, next) => {
 }
 
 module.exports.getUserCards = async (req, res, next) => {
-  const userId = req.params.id;
+  
+  const userId = req.params.id ? req.params.id : req.user.id;
   
   try {
     const user = await User.findById(userId);
