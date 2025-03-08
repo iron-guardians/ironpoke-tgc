@@ -26,6 +26,7 @@
     "jest": "^29.7.0",
     "mongoose": "^8.10.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.9",
     "supertest": "^7.0.0"
   },

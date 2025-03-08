@@ -4,6 +4,8 @@ const User = require("../models/user.model");
 module.exports.create = (req, res, next) => {
     const {email} = req.body;
 
+    console.log(req.body);
+
     User.findOne({email})
         .then((user) => {
             if(user) {
@@ -18,7 +20,6 @@ module.exports.create = (req, res, next) => {
                 email: req.body.email,
                 password: req.body.password,
                 name: req.body.name,
-                avatar: req.file?.path,
                 credits: 500,
             }).then((user) => {
                 res.status(201).json(user);
