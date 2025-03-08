@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import bootstrap from 'bootstrap';
 
 function App() {
 

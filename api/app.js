@@ -21,4 +21,11 @@ app.use("/api/v1/", routes);
 
 const port = Number(process.env.PORT || 3000);
 
-app.listen(port, () => console.info(`Server started on port ${port}`));
+if (process.env.NODE_ENV !== "test") {
+    app.listen(port, () => {
+        console.info(`Server started on port ${port}`);
+    });
+}
+  
+module.exports = app;
+// app.listen(port, () => console.info(`Server started on port ${port}`));
