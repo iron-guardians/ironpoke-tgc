@@ -35,13 +35,13 @@ function RegisterForm() {
 
   return (
     <div>
-      <h2>Register</h2>
-
       <form onSubmit={handleSubmit(handleRegister)}>
-        <div className="input-group mb-1">
-          <span className="input-group-text">
-            <i className="fa fa-user fa-fw"></i>
-          </span>
+        <div className="mb-3">
+      <label htmlFor="username" className="form-label custom-label">User Name</label>
+      <div className="input-group">
+        <span className="input-group-text bg-success text-white">
+          <i className="fa fa-user"></i>
+        </span>
           <input
             type="text"
             className={`form-control ${errors.name ? "is-invalid" : ""}`}
@@ -51,12 +51,13 @@ function RegisterForm() {
           {errors.email && (
             <div className="invalid-feedback">{errors.email.message}</div>
           )}
-        </div>
-
-        <div className="input-group mb-1">
-          <span className="input-group-text">
-            <i className="fa fa-user fa-fw"></i>
-          </span>
+        </div> </div>
+        <div className="mb-3">
+      <label htmlFor="email" className="form-label custom-label">email</label>
+      <div className="input-group">
+        <span className="input-group-text bg-success text-white">
+          <i className="fa fa-envelope"></i>
+        </span>
           <input
             type="email"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
@@ -66,12 +67,13 @@ function RegisterForm() {
           {errors.email && (
             <div className="invalid-feedback">{errors.email.message}</div>
           )}
-        </div>
-
-        <div className="input-group mb-2">
-          <span className="input-group-text">
-            <i className="fa fa-lock fa-fw"></i>
-          </span>
+        </div> </div>
+        <div className="mb-3">
+      <label htmlFor="password" className="form-label custom-label">Password</label>
+      <div className="input-group">
+        <span className="input-group-text bg-success text-white">
+          <i className="fa fa-lock"></i>
+        </span>
           <input
             type="password"
             className={`form-control ${errors.password ? "is-invalid" : ""} `}
@@ -81,12 +83,16 @@ function RegisterForm() {
           {errors.password && (
             <div className="invalid-feedback">{errors.password.message}</div>
           )}
-        </div>
+        </div> </div>
 
         <div className="d-grid">
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-success w-100 custom-button" type="submit">
             Register
           </button>
+          <button className="btn btn-outline-secondary w-100 mt-3" onClick={() => navigate("/login")}>
+          <i className="fa fa-arrow-left me-2"></i>
+          Login
+        </button>
         </div>
       </form>
     </div>

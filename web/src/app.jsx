@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 import {Route, Routes} from 'react-router-dom';
 import {
   Home,
