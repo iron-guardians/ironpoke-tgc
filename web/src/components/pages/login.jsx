@@ -2,7 +2,7 @@ import { PageLayout } from "../layouts";
 import { LoginForm } from "../users";
 
 
-const Login = () => {
+function Login () {
     return (
       <PageLayout>
         <div className="row justify-content-center align-items-center min-vh-100">

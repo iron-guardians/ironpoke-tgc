@@ -1,6 +1,6 @@
 import BackGround from "../../backGround/BackGround";
-import logo from '../../images/descarga.svg';
-const PageLayout = ({ children }) => {
+import logo from '/images/descarga.svg';
+function PageLayout ({ children }) {
   return (   
     <div className="min-vh-100 d-flex flex-column">      
       <header className="fixed-top custom-header-bg text-white text-center p-0 m-0"> 
@@ -12,10 +12,9 @@ const PageLayout = ({ children }) => {
           />
         </div>
       </header>
-      
-      <main className="flex-fill position-relative m-0 p-0">
+      <main className="flex-fill position-relative m-0 py-2 px-0" style={{ overflowX: 'hidden' }}>
         <BackGround />
-        <div className="container">
+        <div className="container-fluid px-5 mx-1">
           {children}
         </div>
       </main>
@@ -27,5 +26,3 @@ const PageLayout = ({ children }) => {
 };
 
 export default PageLayout;
-
-  

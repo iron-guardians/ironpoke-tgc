@@ -1,7 +1,7 @@
 import { PageLayout } from "../layouts";
 import { RegisterForm } from "../users";
 
-const SignUp = () => {
+function SignUp  () {
     return (
       <PageLayout>
         <div className="row justify-content-center align-items-center min-vh-100">
