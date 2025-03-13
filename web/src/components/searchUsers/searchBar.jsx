@@ -1,37 +1,46 @@
-function SearchBar () {
+import { useState } from 'react';
+
+function SearchBar({ onChange }) {
+
+  const [value, setSearchValue] = useState("");
+
+  const handleChange = (letter) => {
+    const newQuery = letter.target.value;
+    setSearchValue(newQuery);
+    
+    if (onChange) {
+      onChange(newQuery);
+    }
+  };
+
+  // Para evitar refrescar la página constantemente
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (onChange) {
+      onChange(value);
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <button 
-          className="navbar-toggler" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarSearch" 
-          aria-controls="navbarSearch" 
-          aria-expanded="true" 
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSearch">
-          <form className="d-flex w-100">
+          <form className="d-flex w-100" onSubmit={handleSubmit}>
             <div className="input-group w-100">
               <input 
                 className="form-control" 
-                name="searchInput" 
                 type="search" 
                 placeholder="Search User..." 
-                aria-label="Search User..." 
+                aria-label="Search User..."
+                value={value}
+                onChange={handleChange}
               />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
             </div>
           </form>
         </div>
-      </div>
-    </nav>
+
+          </nav>
   );
-};
+}
 
 export default SearchBar;

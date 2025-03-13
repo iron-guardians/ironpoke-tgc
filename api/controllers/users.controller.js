@@ -28,7 +28,51 @@ module.exports.create = (req, res, next) => {
     })
     .catch((error) => next(error));
 };
-                          
+
+module.exports.show = (req, res, next) => {
+    User.findById(req.params.id)
+        .then((user) => {
+            if (user) {
+                res.json(user);
+            } else {
+                next(createError(404, "User not found"));
+            }
+        })
+        .catch(next);
+};   
+
+module.exports.getUsers = async (req, res, next) => {
+    console.log(req.params.id)
+
+    try {
+      const filter = {};
+  
+      if(req.params.id) {
+        filter.cardId = req.params.id; 
+      }
+  
+      if (req.query.set) {
+        filter["set.id"] = req.query.set;
+      } 
+    
+      if (req.query.types) {
+        const typesArray = req.query.types.split(",");
+        filter.types = { $in: typesArray };
+      }
+      
+      const users = await User.find(filter);
+  
+      if (!users.length) {
+        return res.status(404).json({ message: "Users not found." });
+      }
+  
+      res.json(users);
+      
+    } catch (error) {
+      next(error);
+    }
+  };
+
 module.exports.validate = (req, res, next) => {
     User.findOne({_id: req.params.id, activateToken: req.params.token})
         .then((user) => {
@@ -40,11 +84,11 @@ module.exports.validate = (req, res, next) => {
         }
     })
     .catch(next);
-}
+};
 
 module.exports.profile = (req, res, next) => {
     res.json(req.user);
-}
+};
 
 module.exports.addCards = (req, res, next) => {
     const { cards } = req.body;
