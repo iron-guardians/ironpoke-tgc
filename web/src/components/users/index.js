@@ -1,2 +1,2 @@
 export {default as LoginForm} from './login/login-form';
-export {default as SignUpForm} from './signup/signup-form';
+export {default as RegisterForm} from './signup/signup-form';

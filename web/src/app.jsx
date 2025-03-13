@@ -1,10 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import './index.css';
 import {Route, Routes} from 'react-router-dom';
 import {
   Home,
   LogIn,
   SignUp,
   ProfilePage,
+  SearchUsers
 } from './components/pages';
 import { PrivateRoute } from './guards';
 
@@ -19,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile/me" element={<PrivateRoute><ProfilePage /></PrivateRoute>}></Route>
         <Route path="/profile/:userId" element={<PrivateRoute><ProfilePage /></PrivateRoute>}></Route>
+        <Route path="/searchUsers" element={<SearchUsers />} />
       </Routes>
     </div>
   )

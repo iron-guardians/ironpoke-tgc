@@ -34,9 +34,11 @@ function LoginForm() {
     <div>
       <form onSubmit={handleSubmit(handleLogin)} data-testid="login-form">
         <div className="input-group mb-1">
-          <span className="input-group-text">
-            <i className="fa fa-user fa-fw"></i>
-          </span>
+        <label htmlFor="username" className="form-label custom-label">Email</label>
+      <div className="input-group">
+        <span className="input-group-text bg-success text-white">
+          <i className="fa fa-user"></i>
+        </span>
           <input
             type="email"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
@@ -48,10 +50,13 @@ function LoginForm() {
             <div className="invalid-feedback">{errors.email.message}</div>
           )}
         </div>
-        <div className="input-group mb-2">
-          <span className="input-group-text">
-            <i className="fa fa-lock fa-fw"></i>
-          </span>
+        </div>
+        <div className="mb-3">
+      <label htmlFor="password" className="form-label custom-label">Password</label>
+      <div className="input-group">
+        <span className="input-group-text bg-success text-white">
+          <i className="fa fa-lock"></i>
+        </span>
           <input
             type="password"
             className={`form-control ${errors.password ? "is-invalid" : ""} `}
@@ -62,16 +67,17 @@ function LoginForm() {
           {errors.password && (
             <div className="invalid-feedback">{errors.password.message}</div>
           )}
-        </div>
+        </div> </div>
         <div className="d-grid">
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-success w-100 custom-button" type="submit">
             Login
           </button>
         </div>
       </form>
       <div className="d-grid mt-2">
-        <button className="btn btn-secondary" onClick={() => navigate("/signup")}>
-          Sign Up
+        <button className="btn btn-outline-success w-100 mt-3" onClick={() => navigate("/signup")}>
+          Sign Up     
+          <i className="fa fa-arrow-right ms-2"></i>
         </button>
       </div>
     </div>
