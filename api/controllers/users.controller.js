@@ -46,6 +46,18 @@ module.exports.profile = (req, res, next) => {
     res.json(req.user);
 }
 
+module.exports.show = (req, res, next) => {
+    User.findById(req.params.id)
+        .then((user) => {
+            if (user) {
+                res.json(user);
+            } else {
+                next(createError(404, "User not found"));
+            }
+        })
+        .catch(next);
+}
+
 module.exports.addCards = (req, res, next) => {
     const { cards } = req.body;
 

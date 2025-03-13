@@ -1,0 +1,31 @@
+/* Make the profile page take full height */
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevents extra scrollbars */
+}
+
+/* Keep ProfileHeader fixed at the top */
+.profile-header-container {
+    flex-shrink: 0; /* Prevents shrinking */
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1000;
+    padding: 10px;
+}
+
+/* This container takes the remaining space and enables scrolling */
+.profile-content {
+    flex-grow: 1;
+    overflow-y: auto; /* Enables scrolling only here */
+    padding: 10px;
+}
+
+/* The card collection can scroll within profile-content */
+.profile-card-sets-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

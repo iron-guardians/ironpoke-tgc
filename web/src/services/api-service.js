@@ -18,5 +18,9 @@ const register = (user) => http.post("/users", user);
 
 const login = (user) => http.post("/sessions", user);
 
+const getUser = (userId) => http.get(`/users/${userId}`);
 
-export { login, register, profile };
+const getUserCards = (userId) => http.get(`/user-cards/${userId}`);
+
+
+export { login, register, profile, getUser, getUserCards };

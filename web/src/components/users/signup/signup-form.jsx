@@ -4,10 +4,9 @@ import { useAuthContext } from "../../../contexts/auth-context";
 import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
-  const { register, handleSubmit, formState, setError } = useForm();
+  const { register, handleSubmit, formState: { errors }, setError } = useForm();
   const { login } = useAuthContext();
   const navigate = useNavigate();
-  const errors = formState.errors;
 
   const handleRegister = async (user) => {
     const formData = new FormData();
@@ -17,7 +16,7 @@ function RegisterForm() {
     formData.append("password", user.password);
 
     try {
-      await IronPokeApi.register(formData);
+      await IronPokeApi.register(user);
 
       const data = await IronPokeApi.login(user);
 
@@ -46,16 +45,16 @@ function RegisterForm() {
             type="text"
             className={`form-control ${errors.name ? "is-invalid" : ""}`}
             placeholder="John Doe"
-            {...register("name", { required: "Mandatory field" })}
+            {...register("name", { required: "Username is required" })}
           />
-          {errors.email && (
-            <div className="invalid-feedback">{errors.email.message}</div>
+          {errors.name && (
+            <div className="invalid-feedback">{errors.name.message}</div>
           )}
         </div>
 
         <div className="input-group mb-1">
           <span className="input-group-text">
-            <i className="fa fa-user fa-fw"></i>
+            <i className="fa fa-envelope fa-fw"></i>
           </span>
           <input
             type="email"
@@ -74,7 +73,7 @@ function RegisterForm() {
           </span>
           <input
             type="password"
-            className={`form-control ${errors.password ? "is-invalid" : ""} `}
+            className={`form-control ${errors.password ? "is-invalid" : ""}`}
             placeholder="****"
             {...register("password", { required: "Mandatory field" })}
           />

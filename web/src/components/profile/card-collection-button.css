@@ -1,0 +1,16 @@
+.card-collection-button {
+    border: 1px solid #e1e8ed; /* Add border */
+    border-radius: 8px; /* Add border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    background-color: #fff; /* Ensure background color is white */
+    padding: 16px; /* Add padding */
+    transition: transform 0.2s; /* Add transition for hover effect */
+}
+
+.card-collection-button:hover {
+    transform: translateY(-5px); /* Add hover effect */
+}
+
+.card-collection-button img {
+    border-radius: 4px; /* Optional: Add border radius to image */
+}
