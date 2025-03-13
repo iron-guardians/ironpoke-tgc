@@ -7,7 +7,9 @@ import {
   LogIn,
   SignUp,
   ProfilePage,
-  SearchUsers
+  SearchUsers,
+  CollectionPage,
+  PageNotFound,
 } from './components/pages';
 import { PrivateRoute } from './guards';
 
@@ -23,6 +25,8 @@ function App() {
         <Route path="/profile/me" element={<PrivateRoute><ProfilePage /></PrivateRoute>}></Route>
         <Route path="/profile/:userId" element={<PrivateRoute><ProfilePage /></PrivateRoute>}></Route>
         <Route path="/searchUsers" element={<SearchUsers />} />
+        <Route path="/profile/:userId/collection/:setId" element={<PrivateRoute><CollectionPage /></PrivateRoute>} />
+        <Route path="*" element={<PrivateRoute><PageNotFound /></PrivateRoute>} />
       </Routes>
     </div>
   )

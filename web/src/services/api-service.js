@@ -22,5 +22,7 @@ const getUser = (userId) => http.get(`/users/${userId}`);
 
 const getUserCards = (userId) => http.get(`/user-cards/${userId}`);
 
+const getSet = (setId) => http.get(`/card-sets/${setId}`);
 
-export { login, register, profile, getUser, getUserCards };
+
+export { login, register, profile, getUser, getUserCards, getSet };

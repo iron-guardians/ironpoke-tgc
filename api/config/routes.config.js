@@ -23,6 +23,8 @@ router.get("/user-cards", auth.isAuthenticated, cards.getUserCards)
 router.get("/user-cards/:userId?", auth.isAuthenticated, cards.getUserCards);
 
 router.post("/card-sets", cardSets.createAllSets);
+router.get("/card-sets", cardSets.getSets);
+router.get("/card-sets/:id", cardSets.getSet);
 
 router.post("/users", users.create);
 router.get("/users/me", auth.isAuthenticated, users.profile);

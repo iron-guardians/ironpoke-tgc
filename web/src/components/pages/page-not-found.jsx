@@ -1,3 +1,5 @@
+import { PageLayout } from '../layouts';
+
 function PageNotFound() {
   return (
     <PageLayout>
