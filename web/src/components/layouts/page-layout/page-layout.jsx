@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import BackGround from "../../backGround/BackGround";
 import logo from '/images/descarga.svg';
 
@@ -11,7 +12,8 @@ function PageLayout({ children }) {
       <header className="fixed-top custom-header-bg text-white p-0 m-0">
         <div className="container-fluid">
           <div className="row align-items-center">
-            {/* Columna izquierda: Home */}
+
+            {/* Left column: Home */}
             <div className="col-4">
               <nav>
                 <ul className="nav">
@@ -26,7 +28,8 @@ function PageLayout({ children }) {
                 </ul>
               </nav>
             </div>
-            {/* Columna central: Logo */}
+
+            {/* Center column: Logo */}
             <div className="col-4 text-center">
               <div
                 className="logo-containerh"
@@ -40,7 +43,8 @@ function PageLayout({ children }) {
                 />
               </div>
             </div>
-            {/* Columna derecha: Search y Profile */}
+
+            {/* Right column: Search and Profile */}
             <div className="col-4 text-end">
               <nav>
                 <ul className="nav justify-content-end">
@@ -66,6 +70,7 @@ function PageLayout({ children }) {
           </div>
         </div>
       </header>
+
       <main className="flex-fill position-relative m-0 py-2 px-0" style={{ overflowX: 'hidden' }}>
         <BackGround />
         <div className="container-fluid px-5 mx-1">

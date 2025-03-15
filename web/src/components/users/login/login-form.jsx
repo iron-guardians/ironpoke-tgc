@@ -18,12 +18,14 @@ function LoginForm() {
       user = await IronPokeApi.login(user);
       login(user);
       navigate("/");
+
     } catch (error) {
       if (error.response?.status === 401) {
         const { data } = error.response;
         Object.keys(data.errors).forEach((inputName) =>
           setError(inputName, { message: data.errors[inputName] })
         );
+
       } else {
         console.error(error);
       }
@@ -52,6 +54,7 @@ function LoginForm() {
         </div>
         </div>
         <div className="mb-3">
+
       <label htmlFor="password" className="form-label custom-label">Password</label>
       <div className="input-group">
         <span className="input-group-text bg-success text-white">
@@ -74,6 +77,7 @@ function LoginForm() {
           </button>
         </div>
       </form>
+      
       <div className="d-grid mt-2">
         <button className="btn btn-outline-success w-100 mt-3" onClick={() => navigate("/signup")}>
           Sign Up     

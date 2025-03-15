@@ -37,7 +37,6 @@ function ProfilePage() {
             setUserCards(cards);
 
             // Extract unique card sets
-            // PETA POR ESTA PUTA LINEA
             const uniqueSets = new Map();
             cards.forEach(card => {
                 if (!uniqueSets.has(card.set.id)) {
@@ -45,6 +44,7 @@ function ProfilePage() {
                 }
             });
             setCardSets([...uniqueSets.values()]);
+            
         } catch (error) {
             if (isOwnProfile) {
                 navigate("/login");

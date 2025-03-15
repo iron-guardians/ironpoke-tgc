@@ -13,7 +13,7 @@ function SearchBar({ onChange }) {
     }
   };
 
-  // Para evitar refrescar la página constantemente
+  // To avoid constantly refreshing the page
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -25,21 +25,21 @@ function SearchBar({ onChange }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-          <form className="d-flex w-100" onSubmit={handleSubmit}>
-            <div className="input-group w-100">
-              <input 
-                className="form-control" 
-                type="search" 
-                placeholder="Search User..." 
-                aria-label="Search User..."
-                value={value}
-                onChange={handleChange}
-              />
-            </div>
-          </form>
-        </div>
+        <form className="d-flex w-100" onSubmit={handleSubmit}>
+          <div className="input-group w-100">
+            <input 
+              className="form-control" 
+              type="search" 
+              placeholder="Search User..." 
+              aria-label="Search User..."
+              value={value}
+              onChange={handleChange}
+            />
+          </div>
+        </form>
+      </div>
 
-          </nav>
+    </nav>
   );
 }
 

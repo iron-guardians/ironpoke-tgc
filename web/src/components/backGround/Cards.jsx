@@ -1,6 +1,6 @@
 function Cards({ top, left, delay, imageUrl }) {
   const containerStyle = {
-    position: "absolute", // Asegúrate que el contenedor padre tenga position: relative
+    position: "absolute", // Make sure the parent container has position: relative
     top,
     left,
     animationDelay: delay,
@@ -8,7 +8,7 @@ function Cards({ top, left, delay, imageUrl }) {
 
   const cardsStyle = {
     backgroundImage: `url(${imageUrl})`,
-    backgroundSize: 'contain', // Se ajusta sin recortar
+    backgroundSize: 'contain', // Fits without trimming
     backgroundRepeat: 'no-repeat',
   };
 

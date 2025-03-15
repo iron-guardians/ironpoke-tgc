@@ -52,6 +52,7 @@ function RegisterForm() {
           )}
         </div> </div>
         <div className="mb-3">
+
       <label htmlFor="email" className="form-label custom-label">email</label>
       <div className="input-group">
         <span className="input-group-text bg-success text-white">
@@ -68,6 +69,7 @@ function RegisterForm() {
           )}
         </div> </div>
         <div className="mb-3">
+        
       <label htmlFor="password" className="form-label custom-label">Password</label>
       <div className="input-group">
         <span className="input-group-text bg-success text-white">
