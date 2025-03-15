@@ -15,6 +15,22 @@
     
     
   }
+
+  .background-home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, rgba(71, 71, 71, 0.7), rgba(243,231,243,0.7)), url('./../public/images/fondoPoke3D.jpg') no-repeat center center ;
+    background-size: cover;
+    overflow: hidden;
+    
+    
+  }
+
+
   
   .custom-header-bg {
     background: linear-gradient(160deg, #f5a6e6, #c5b3f6, #f5a6e6);

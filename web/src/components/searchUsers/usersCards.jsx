@@ -1,10 +1,16 @@
 
+import { useNavigate } from 'react-router-dom';
+
+
 function UserCard({user}) {
+
+  
+  const navigate = useNavigate();
   const totalCards = 1000;
   const userCards =user.cardsCollection.length; // ejemplo: el usuario tiene 100 cartas
   const percentage = Math.round((userCards / totalCards) * 100);
   return (
-    <div className="card mb-3 shadow-sm user-card bg-white">
+    <div onClick={() => navigate(`/profile/${user.id}`)} className="card mb-3 shadow-sm user-card bg-white">
     <div className="card-body d-flex align-items-center flex-wrap">
       {/* Imagen en círculo a la izquierda */}
       <div className="me-3 mb-3 mb-md-0">

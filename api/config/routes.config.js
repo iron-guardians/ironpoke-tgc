@@ -28,13 +28,17 @@ router.get("/card-sets/:id", cardSets.getSet);
 
 router.post("/users", users.create);
 router.get("/users", users.getUsers);
-router.get("/users/me", auth.isAuthenticated, users.profile);
+router.get("/users/me", auth.isAuthenticated, users.show);
 router.get("/users/:id", users.show);
 router.get("/users/:id/validate", users.validate);
 router.patch("/users/add-cards", auth.isAuthenticated, users.addCards);
 
 router.post("/sessions", sessions.create);
 router.delete("/sessions", auth.isAuthenticated, sessions.destroy);
+
+
+router.get("/profile/:id", auth.isAuthenticated, users.show);
+router.get("/profile/me", auth.isAuthenticated, users.show);
 
 
 router.use((req, res, next) => {
