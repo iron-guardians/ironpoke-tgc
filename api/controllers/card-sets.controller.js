@@ -13,6 +13,7 @@ module.exports.createAllSets = async (req, res) => {
 
     for (const set of sets) {
       const existingSet = await CardSet.findOne({ setId: set.id });
+
       if (!existingSet) {
         const newSet = new CardSet({
           setId: set.id,
@@ -23,8 +24,10 @@ module.exports.createAllSets = async (req, res) => {
           legalities: set.legalities,
           images: set.images,
         });
+
         await newSet.save();
         savedSets.push(newSet);
+
       } else {
         console.log(`Set ${set.id} already exists in the database.`);
       }
@@ -34,6 +37,7 @@ module.exports.createAllSets = async (req, res) => {
       message: "All unique sets have been added to the database.",
       savedSets,
     });
+
   } catch (error) {
     console.error("Error fetching or saving sets:", error);
     res.status(500).json({ message: "Error fetching or saving sets", error });
@@ -44,6 +48,7 @@ module.exports.getSets = async (req, res) => {
   try {
     const sets = await CardSet.find();
     res.json(sets);
+
   } catch (error) {
     console.error("Error fetching sets:", error);
     res.status(500).json({ message: "Error fetching sets", error });
@@ -59,6 +64,7 @@ module.exports.getSet = async (req, res) => {
       return res.status(404).json({ message: "Set not found" });
     }
     res.json(set);
+    
   } catch (error) {
     console.error("Error fetching set:", error);
     res.status(500).json({ message: "Error fetching set", error });

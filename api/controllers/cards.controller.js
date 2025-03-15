@@ -22,7 +22,6 @@ module.exports.storeAllCards = async (req, res, next) => {
     console.log(`Total Cards: ${totalCards}`);
     console.log(`Total Pages: ${totalPages}`);
 
-
     for (const card of data) {
       const existingCard = await Card.findOne({ cardId: card.id });
       if (!existingCard) {
@@ -98,7 +97,7 @@ module.exports.openBoosterPack = async (req, res, next) => {
     const pack = await BoosterPack.findById(boosterPackId);
 
     if (!pack) {
-     next(createError(404, "Booster pack not found"));
+      next(createError(404, "Booster pack not found"));
     } else {
       const cards = [];
       const cardsToPickFrom = await Card.find(pack.filter);
@@ -131,6 +130,7 @@ module.exports.getUserCards = async (req, res, next) => {
       userCards.push(card);
     }
     res.json(userCards);
+    
   } catch (error) {
     next(error);
   }

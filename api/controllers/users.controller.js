@@ -21,6 +21,7 @@ module.exports.create = (req, res, next) => {
                 password: req.body.password,
                 name: req.body.name,
                 credits: 500,
+                
             }).then((user) => {
                 res.status(201).json(user);
             });

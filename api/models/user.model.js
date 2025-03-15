@@ -8,8 +8,8 @@ const EMAIL_PATTERN =
 const PASSWORD_PATTERN = /^.{8,}$/;
 
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '')
-  .split(',')
-  .map((email) => email.trim().toLowerCase());
+    .split(',')
+    .map((email) => email.trim().toLowerCase());
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
         maxLength: [20, "Username cannot be longer than 20 characters"],
         trim: true
     },
+
     email: {
         type: String,
         trim: true,
@@ -26,15 +27,18 @@ const userSchema = new mongoose.Schema({
         required: [true, "Email is required"],
         match: [EMAIL_PATTERN, "Email is invalid"],
     },
+
     password: {
         type: String,
         required: [true, "Password is required"],
         match: [PASSWORD_PATTERN, "Password must be at least 8 characters long"],
     },
+
     active: {
         type: Boolean,
         default: false,
     },
+
     activateToken: {
         type: String,
         default: function () {
@@ -45,6 +49,7 @@ const userSchema = new mongoose.Schema({
             );
         },
     },
+
     avatar: {
         type: String,
         default: function () {
@@ -57,25 +62,30 @@ const userSchema = new mongoose.Schema({
             },
         },
     },
+
     role: {
         type: String,
         enum: ["user", "admin"],
         default: "user",
     },
+
     credits: {
         type: Number,
         default: 0,
         min: [0, "Pack prize cannot be negative"],
     },
+
     cardsCollection: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Card"
         }],
+
     lastOpen: {
         type: Date,
         default: Date.now
     }
+    
 }, {
     timestamps: true,
     toJSON: {
