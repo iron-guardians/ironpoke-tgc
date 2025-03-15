@@ -52,9 +52,8 @@ module.exports.getSets = async (req, res) => {
 
 module.exports.getSet = async (req, res) => {
   try {
-    console.log(req.params.id);
-
     const set = await CardSet.find({ setId: req.params.id });
+    
     if (!set) {
       return res.status(404).json({ message: "Set not found" });
     }

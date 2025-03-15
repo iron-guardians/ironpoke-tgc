@@ -37,9 +37,6 @@ router.post("/sessions", sessions.create);
 router.delete("/sessions", auth.isAuthenticated, sessions.destroy);
 
 
-router.get("/profile/:id", auth.isAuthenticated, users.show);
-router.get("/profile/me", auth.isAuthenticated, users.show);
-
 
 router.use((req, res, next) => {
     next(createError(404, "Route not found"));

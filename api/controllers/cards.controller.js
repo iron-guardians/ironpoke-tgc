@@ -119,8 +119,7 @@ module.exports.openBoosterPack = async (req, res, next) => {
 }
 
 module.exports.getUserCards = async (req, res, next) => {
-  
-  const userId = req.params.id ? req.params.id : req.user.id;
+  const userId = req.params.userId ? req.params.userId : req.user.id;
   
   try {
     const user = await User.findById(userId);
