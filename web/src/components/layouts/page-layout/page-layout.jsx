@@ -55,7 +55,7 @@ function PageLayout({ children }) {
                   <li className="nav-item">
                     <button
                       className="nav-link btn btn-link text-white"
-                      onClick={() => navigate('/user/me')}
+                      onClick={() => navigate('/profile/me')}
                     >
                       Profile
                     </button>

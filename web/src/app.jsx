@@ -22,7 +22,6 @@ function App() {
         <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile/me" element={<PrivateRoute><ProfilePage /></PrivateRoute>}></Route>
         <Route path="/profile/:userId" element={<PrivateRoute><ProfilePage /></PrivateRoute>}></Route>
         <Route path="/searchUsers" element={<SearchUsers />} />
         <Route path="/profile/:userId/collection/:setId" element={<PrivateRoute><CollectionPage /></PrivateRoute>} />

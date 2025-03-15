@@ -1,7 +1,7 @@
-import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-
-import {getUser, getSet} from "../../services/api-service";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUser, getSet, getUserCards } from "../../services/api-service";
+import CardViewer from "../card-visualizer/3d-viewer"; // Import the 3D viewer
 import "./collection.css";
 
 function CollectionPage() {
@@ -9,24 +9,52 @@ function CollectionPage() {
     const [user, setUser] = useState(undefined);
     const [userCards, setUserCards] = useState([]);
     const [cardSet, setCardSet] = useState([]);
+    const [selectedCard, setSelectedCard] = useState(null); // Track selected card
+    const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
 
     useEffect(() => {
         getUser(userId)
             .then((data) => {
                 setUser(data);
-
-                const filteredCards = userCards.filter(card => card.set.id === setId);
-                setUserCards(filteredCards);
             })
             .catch(() => setUser(null));
         
         getSet(setId)
             .then((data) => {
-                console.log(data[0]);
                 setCardSet(data[0]);
             })
             .catch(() => setCardSet(null));
     }, []);
+
+    useEffect(() => {
+        if (user) {
+            getUserCards(userId)
+                .then((data) => {
+                    const filteredCards = data.filter(card => card.set.id === setId);
+                    setUserCards(filteredCards);
+                })
+                .catch(() => setUserCards([]));
+        }
+    }, [user]);
+
+    // Handle card click
+    const handleCardClick = (card) => {
+        setSelectedCard(card);
+        setIsModalOpen(true);
+    };
+
+    // Close modal function
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedCard(null);
+    };
+
+    // Close modal when clicking outside the content
+    const handleOverlayClick = (e) => {
+        if (e.target.classList.contains("modal-overlay")) {
+            closeModal();
+        }
+    };
 
     return (
         (user && cardSet) ? (
@@ -38,7 +66,13 @@ function CollectionPage() {
                         return (
                             <div key={index} className="card-slot">
                                 {card ? (
-                                    <img src={card.images.small} alt={card.name} className="card-image" />
+                                    <img 
+                                        src={card.images.small} 
+                                        alt={card.name} 
+                                        className="card-image"
+                                        onClick={() => handleCardClick(card)} // Open viewer
+                                        style={{ cursor: "pointer" }} // Indicate clickable
+                                    />
                                 ) : (
                                     <div className="empty-slot">
                                         <span className="card-number">{index + 1}</span>
@@ -48,6 +82,15 @@ function CollectionPage() {
                         );
                     })}
                 </div>
+
+                {isModalOpen && selectedCard && (
+                    <div className="modal-overlay" onClick={handleOverlayClick}>
+                        <div className="modal-content">
+                            <button className="close-button" onClick={closeModal}>✖</button>
+                            <CardViewer imageUrl={selectedCard.images.large} />
+                        </div>
+                    </div>
+                )}
             </div>
         ) : (
             <div>
