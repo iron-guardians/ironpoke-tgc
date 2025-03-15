@@ -28,7 +28,7 @@ router.get("/card-sets/:id", cardSets.getSet);
 
 router.post("/users", users.create);
 router.get("/users", users.getUsers);
-router.get("/users/me", auth.isAuthenticated, users.show);
+router.get("/users/me", auth.isAuthenticated, users.profile);
 router.get("/users/:id", users.show);
 router.get("/users/:id/validate", users.validate);
 router.patch("/users/add-cards", auth.isAuthenticated, users.addCards);
