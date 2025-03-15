@@ -1,10 +1,12 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import { useNavigate } from 'react-router-dom';
 
 import {getUser, getSet} from "../../services/api-service";
 import "./collection.css";
 
 function CollectionPage() {
+    const navigate = useNavigate();
     const { userId, setId } = useParams();
     const [user, setUser] = useState(undefined);
     const [userCards, setUserCards] = useState([]);
@@ -31,7 +33,7 @@ function CollectionPage() {
     return (
         (user && cardSet) ? (
             <div className="collection-page">
-                <img src={cardSet.images?.logo} alt={setId} className="set-logo" />
+                <img  onClick={() => navigate(`/profile/${user.id}`)} src={cardSet.images?.logo} alt={setId} className="set-logo" />
                 <div className="card-grid">
                     {Array.from({ length: cardSet.total }).map((_, index) => {
                         const card = userCards.find(card => card.number === String(index + 1));
