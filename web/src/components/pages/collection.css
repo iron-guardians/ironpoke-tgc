@@ -1,67 +1,145 @@
 .collection-page {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.collection-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+.set-logo-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #eee;
 }
 
 .set-logo {
-    width: 100%; /* Make the image as wide as the screen */
-    max-width: 1200px; /* Optional: Set a max width */
-    margin-bottom: 20px;
-    position: sticky; /* Make the image sticky */
-    top: 0; /* Stick to the top of the viewport */
-    z-index: 10; /* Ensure it stays above other content */
-    background-color: #fff; /* Ensure background color is white */
-    padding: 10px 0; /* Optional: Add padding */
+    max-width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.set-logo:hover {
+    transform: scale(1.05);
+}
+
+.progress-info {
+    text-align: center;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.card-grid-container {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
 }
 
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px;
-    width: 100%;
-    max-width: 1200px;
-    justify-items: center; /* Center the card slots */
+    justify-content: center;
 }
 
 .card-slot {
-    width: 100px;
-    height: 140px;
-    border: 1px solid #e1e8ed;
-    border-radius: 8px;
+    position: relative;
+    width: 120px;
+    height: 160px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f8f9fa;
-    position: relative;
+    transition: all 0.3s;
+}
+
+.card-slot.owned {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card-image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.card-image:hover {
+    transform: scale(1.1);
 }
 
 .empty-slot {
     width: 100%;
     height: 100%;
-    background-color: #e1e8ed; /* Add color to the empty slot */
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px dashed #bbb;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    font-weight: bold;
+    font-size: 18px;
+    color: #555;
+    border-radius: 10px;
+}
+
+.no-cards-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #777;
+}
+
+.loading-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .card-number {
-    color: #657786; /* Text color */
-    font-size: 1rem; /* Font size */
-    font-weight: bold; /* Font weight */
+    color: #657786;
+    font-size: 1rem;
+    font-weight: bold;
     position: absolute;
-    bottom: 8px; /* Position the number at the bottom */
-    right: 8px; /* Position the number at the bottom */
+    bottom: 8px;
+    right: 8px;
 }
 
 .modal-overlay {
@@ -95,25 +173,15 @@
 
 .close-button {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 0, 0, 0.8);
-    color: white;
+    top: 10px;
+    right: 10px;
     border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 50%;
+    background: transparent;
+    font-size: 20px;
     cursor: pointer;
-    transition: 0.2s ease-in-out;
     z-index: 1000;
 }
 
-.close-button:hover {
-    background: rgba(255, 0, 0, 1);
-    transform: scale(1.1);
-}
-
-/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -122,4 +190,38 @@
 @keyframes slideIn {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .card-slot {
+        width: 100px;
+        height: 130px;
+    }
+
+    .empty-slot {
+        font-size: 14px;
+        border-width: 1.5px;
+    }
+
+    .set-logo {
+        width: 180px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .card-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    .card-slot {
+        width: 110px;
+        height: 150px;
+    }
 }

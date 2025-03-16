@@ -1,7 +1,7 @@
 function ProfileHeader({user, className}) {
     return (
         <div className={className}>
-            <div className="card w-100 mt-4 p-3 shadow-sm">
+            <div className="card w-100 mt-4 shadow-sm">
                 <div className="d-flex align-items-center gap-3">
                     <img src={user.avatar} className="rounded-circle bg-secondary" style={{ width: '60px', height: '60px' }}></img>
                         <div>

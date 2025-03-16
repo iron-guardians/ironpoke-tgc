@@ -14,7 +14,7 @@ export const generatePositions = (count, minDistance) => {
         }
       }
       if (valid) {
-        positions.push({ top, left, delay: Math.random() * 4 }); // delay entre 0 y 4 segundos
+        positions.push({ top, left, delay: Math.random() * 9 }); // delay entre 0 y 4 segundos
       }
       attempts++;
     }

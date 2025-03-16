@@ -1,0 +1,25 @@
+/* Custom styles for smaller burger icon */
+.custom-toggler .navbar-toggler-icon {
+    width: 20px; /* Reduce the size */
+    height: 20px;
+  }
+  
+  .navbar-nav .nav-item .nav-link {
+    font-size: 16px; /* Adjust font size for better readability */
+    padding: 8px 12px; /* Add some padding for buttons */
+  }
+  
+  .navbar-nav .nav-item .nav-link:hover {
+    color: #f0f0f0; /* Change hover color */
+  }
+  
+  /* Styling for navbar background */
+  .custom-header-bg {
+    background-color: #343a40; /* Customize navbar background */
+  }
+
+  
+  .animated-logo:hover {
+    transform: scale(1.05); /* Add a small hover effect for the logo */
+  }
+  

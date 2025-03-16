@@ -20,7 +20,7 @@ const PokemonCard3D = ({ imageUrl }) => {
         <meshStandardMaterial  
           map={frontTexture}
           alphaMap={alphaTexture}
-          roughness={0.3}
+          roughness={0.4}
           transparent={true}
         />
       </mesh>
@@ -31,7 +31,7 @@ const PokemonCard3D = ({ imageUrl }) => {
         <meshStandardMaterial  
           map={backTexture} 
           alphaMap={alphaTexture}
-          roughness={0.3}
+          roughness={0.4}
           transparent={true}
         />
       </mesh>
@@ -42,8 +42,14 @@ const PokemonCard3D = ({ imageUrl }) => {
 const CardViewer = ({ imageUrl }) => {
     return (
       <div style={{ width: "100%", height: "100%" }}>
-        <Canvas camera={{ position: [0, 0, 1.2] }}>
-          <ambientLight intensity={4} />
+        <Canvas camera={{ position: [0, 0, 1.5] }}>
+          <ambientLight intensity={2} />
+          <pointLight distance={5} intensity={5} position={[0, 0.5, 1]} color={new Color("#ff0000")}/>
+          <pointLight distance={5} intensity={5} position={[-1, 0.5,1]} color={new Color("#00ff00")} />
+          <pointLight distance={5} intensity={5} position={[1, 0.5, 1]} color={new Color("#0000ff")} />
+          <pointLight distance={5} intensity={5} position={[0, 0.5, -1]} color={new Color("#ff0000")}/>
+          <pointLight distance={5} intensity={5} position={[-1, 0.5, -1]} color={new Color("#00ff00")} />
+          <pointLight distance={5} intensity={5} position={[1, 0.5, -1]} color={new Color("#0000ff")} />
           <PokemonCard3D imageUrl={imageUrl} />
           <OrbitControls autoRotate autoRotateSpeed={0.2} enablePan={false} enableZoom={false} />
         </Canvas>

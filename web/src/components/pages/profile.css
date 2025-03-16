@@ -1,31 +1,90 @@
-/* Make the profile page take full height */
 .profile-page-container {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevents extra scrollbars */
+    gap: 20px;
+    height: 100vh; /* Full height of the viewport */
 }
 
-/* Keep ProfileHeader fixed at the top */
-.profile-header-container {
-    flex-shrink: 0; /* Prevents shrinking */
+.profile-header-wrapper {
     position: sticky;
     top: 0;
-    background: white;
-    z-index: 1000;
-    padding: 10px;
+    z-index: 10; /* Keep the profile header on top */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px; /* Space below the header */
 }
 
-/* This container takes the remaining space and enables scrolling */
 .profile-content {
-    flex-grow: 1;
-    overflow-y: auto; /* Enables scrolling only here */
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto; /* Allows scrolling content */
+    flex-grow: 1; /* Take up available space */
 }
 
-/* The card collection can scroll within profile-content */
-.profile-card-sets-container {
+.profile-card-sets-wrapper {
+    flex-grow: 1;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 10px;
+    overflow-y: auto; /* Enable scrolling */
+    max-height: calc(100vh - 160px); /* Adjust height for remaining space after header */
+    padding-right: 10px; /* Ensure scrollbars aren't hidden */
+}
+
+.profile-card-sets-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card-collection-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.card-collection-button:hover {
+    transform: scale(1.05);
+}
+
+.no-cards-message {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+    padding: 20px;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .profile-page-container {
+        padding: 10px;
+    }
+
+    .profile-card-sets-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
 }
