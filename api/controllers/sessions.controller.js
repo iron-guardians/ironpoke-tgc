@@ -33,5 +33,5 @@ module.exports.create = async (req, res, next) => {
 
 module.exports.destroy = (req, res, next) => {
     req.session.destroy();
-    req.status(204).send();
+    res.status(204).send();
 }

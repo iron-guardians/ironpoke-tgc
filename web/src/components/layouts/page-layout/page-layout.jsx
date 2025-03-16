@@ -2,9 +2,30 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackGround from "../../backGround/BackGround";
 import logo from '/images/descarga.svg';
+import * as IronPokeApi from "../../../services/api-service";
+
+
+
 
 function PageLayout({ children, variant }) {
   const navigate = useNavigate();
+
+  const handleCloseSession = async () => {
+   
+    try {
+      await IronPokeApi.closeSession();
+
+      navigate("/login");
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        Object.keys(error.response.data.errors).forEach((inputName) =>
+          setError(inputName, { message: error.response.data.errors[inputName] })
+        );
+      } else {
+        console.error("Error closing session:", error);
+      }
+  };
+  }
 
   return (
     <div className="min-vh-100 d-flex flex-column">
@@ -43,7 +64,16 @@ function PageLayout({ children, variant }) {
                     My Profile
                   </button>
                 </li>
-              </ul>
+                <li className="nav-item">
+                  <button
+                    className="nav-link btn btn-link text-white"
+                    onClick={() => handleCloseSession()}
+                    
+                  >
+                    Close
+                  </button>
+                </li>
+                              </ul>
             </div>
           </div>
         </nav>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { PageLayout } from "../layouts";
 import { ProfileHeader, CardCollectionButton } from "../profile/";
 import { useParams, useNavigate } from "react-router-dom";
 import { profile, getUser, getUserCards } from "../../services/api-service";
@@ -78,6 +77,13 @@ function ProfilePage() {
                         ))}
                     </div>
                 </div>
+                                <button 
+                    type="button" 
+                    className="btn btn-outline-success btn-hover-success" 
+                    onClick={() => navigate("/")}
+                    >
+                    <i className="fa fa-arrow-left"></i> BACK
+                    </button>
             </div>
         ) : (
             <div>Loading...</div>

@@ -24,5 +24,7 @@ const getUserCards = (userId) => http.get(`/user-cards/${userId}`);
 
 const getSet = (setId) => http.get(`/card-sets/${setId}`);
 
+const closeSession = () => http.delete("/sessions");
 
-export { login, register, profile, getUser, getUserCards, getSet };
+
+export { login, register, profile, getUser, getUserCards, getSet, closeSession };
