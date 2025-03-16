@@ -1,7 +1,11 @@
 /* Centra el carrusel en la pantalla */
 .coverflow-carousel {
     /* Puedes ajustar la altura o márgenes para centrar verticalmente según necesites */
-    min-height: 60vh;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   
   /* Contenedor que agrupa las imágenes */
@@ -18,6 +22,7 @@
   .coverflow-item {
     transition: transform 0.5s ease, opacity 0.5s ease;
     margin: 0 10px;
+    flex: 0 0 calc(100% / 3);
   }
   
   /* Asegura que las imágenes se adapten al contenedor */
@@ -48,3 +53,20 @@
   .coverflow-next {
     transform: scale(0.8) rotateY(-15deg);
   }
+
+@media (max-width: 768px) {
+  .coverflow-container {
+    width: 100%;
+  }
+  .coverflow-item {
+    margin: 0 10px;
+    flex: 0 0 100%;
+  }
+  .coverflow-prev,
+  .coverflow-next {
+    display: none;
+  }
+  .coverflow-active {
+    transform: scale(1);
+  }
+}

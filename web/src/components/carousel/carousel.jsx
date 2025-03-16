@@ -8,20 +8,23 @@ const Carousel = ({ images }) => {
 
   // Funciones para navegar
   const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
+    setActiveIndex((prev) => (prev - 1) >= 0 ? prev - 1 : images.length -1);
+    console.log(activeIndex);
   };
 
   const nextSlide = () => {
     setActiveIndex((prev) => (prev + 1) % images.length);
+    console.log(activeIndex);
   };
+  
 
   // Calcula índices de las imágenes lateral izquierda y derecha
   const prevIndex = (activeIndex - 1 + images.length) % images.length;
   const nextIndex = (activeIndex + 1) % images.length;
 
   return (
-    <div className="coverflow-carousel container d-flex flex-column align-items-center justify-content-center">
-      <div className="d-flex align-items-center">
+    <div className="coverflow-container  d-flex flex-column align-items-center justify-content-center">
+      <div className="coverflow-carousel d-flex align-items-center">
         {/* Botón para ir a la imagen anterior */}
         <button className="btn btn-secondary me-3" onClick={prevSlide}>
           Prev
