@@ -1,0 +1,50 @@
+/* Centra el carrusel en la pantalla */
+.coverflow-carousel {
+    /* Puedes ajustar la altura o márgenes para centrar verticalmente según necesites */
+    min-height: 60vh;
+  }
+  
+  /* Contenedor que agrupa las imágenes */
+  .coverflow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 70%;
+    position: relative;
+  }
+  
+  /* Estilo base para cada imagen */
+  .coverflow-item {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    margin: 0 10px;
+  }
+  
+  /* Asegura que las imágenes se adapten al contenedor */
+  .coverflow-item img {
+    max-width: 100%;
+    display: block;
+    border-radius: 5px;
+  }
+  
+  /* Imagen central destacada */
+  .coverflow-active {
+    transform: scale(1.2);
+    z-index: 2;
+    opacity: 1;
+  }
+  
+  /* Imágenes laterales con menor escala y algo de transparencia */
+  .coverflow-prev,
+  .coverflow-next {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  
+  /* Opcional: si deseas que los laterales se vean ligeramente rotados */
+  .coverflow-prev {
+    transform: scale(0.8) rotateY(15deg);
+  }
+  .coverflow-next {
+    transform: scale(0.8) rotateY(-15deg);
+  }
