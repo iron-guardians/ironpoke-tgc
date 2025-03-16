@@ -54,19 +54,38 @@
     transform: scale(0.8) rotateY(-15deg);
   }
 
-@media (max-width: 768px) {
-  .coverflow-container {
-    width: 100%;
+
+  @media (max-width: 768px) {
+    /* Cambia la dirección del flex del contenedor principal a columna */
+    .coverflow-carousel {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    /* Selecciona el contenedor de imágenes (el hijo directo de .coverflow-carousel) */
+    .coverflow-carousel > .coverflow-container {
+      width: 100%;
+      order: 1;
+    }
+    
+    /* Oculta todas las imágenes dentro del contenedor de imágenes */
+    .coverflow-carousel > .coverflow-container > .coverflow-item {
+      display: none !important;
+    }
+    
+    /* Muestra únicamente la imagen activa */
+    .coverflow-carousel > .coverflow-container > .coverflow-item.coverflow-active {
+      display: block !important;
+      width: 100%;
+      margin: 0 10px;
+    }
+    
+    /* Oculta los botones de PC (ya vienen con clases d-none d-md-block) y muestra el contenedor exclusivo para móvil */
+    .coverflow-nav-buttons {
+      order: 2;
+      margin-top: 10px;
+      display: flex !important;
+      justify-content: center;
+      gap: 20px;
+    }
   }
-  .coverflow-item {
-    margin: 0 10px;
-    flex: 0 0 100%;
-  }
-  .coverflow-prev,
-  .coverflow-next {
-    display: none;
-  }
-  .coverflow-active {
-    transform: scale(1);
-  }
-}
