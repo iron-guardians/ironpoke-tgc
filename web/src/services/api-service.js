@@ -26,5 +26,11 @@ const getSet = (setId) => http.get(`/card-sets/${setId}`);
 
 const closeSession = () => http.delete("/sessions");
 
+const getBoosterPacks = () => http.get("/booster-packs");
 
-export { login, register, profile, getUser, getUserCards, getSet, closeSession };
+const openBoosterPack = (boosterPackId) => http.get(`/open-booster-pack/${boosterPackId}`);
+
+const addCards = (cards) => http.patch("/users/add-cards", { "cards": cards});
+
+
+export { login, register, profile, getUser, getUserCards, getSet, closeSession, getBoosterPacks, openBoosterPack, addCards };

@@ -1,91 +1,171 @@
-/* Centra el carrusel en la pantalla */
-.coverflow-carousel {
-    /* Puedes ajustar la altura o márgenes para centrar verticalmente según necesites */
-    min-height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  
-  /* Contenedor que agrupa las imágenes */
-  .coverflow-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    width: 70%;
-    position: relative;
-  }
-  
-  /* Estilo base para cada imagen */
-  .coverflow-item {
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    margin: 0 10px;
-    flex: 0 0 calc(100% / 3);
-  }
-  
-  /* Asegura que las imágenes se adapten al contenedor */
-  .coverflow-item img {
-    max-width: 100%;
-    display: block;
-    border-radius: 5px;
-  }
-  
-  /* Imagen central destacada */
-  .coverflow-active {
-    transform: scale(1.2);
-    z-index: 2;
-    opacity: 1;
-  }
-  
-  /* Imágenes laterales con menor escala y algo de transparencia */
-  .coverflow-prev,
-  .coverflow-next {
-    transform: scale(0.8);
-    opacity: 0.7;
-  }
-  
-  /* Opcional: si deseas que los laterales se vean ligeramente rotados */
-  .coverflow-prev {
-    transform: scale(0.8) rotateY(15deg);
-  }
-  .coverflow-next {
-    transform: scale(0.8) rotateY(-15deg);
-  }
+/* carousel.css */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
 
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: auto;
+}
 
-  @media (max-width: 768px) {
-    /* Cambia la dirección del flex del contenedor principal a columna */
-    .coverflow-carousel {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    /* Selecciona el contenedor de imágenes (el hijo directo de .coverflow-carousel) */
-    .coverflow-carousel > .coverflow-container {
-      width: 100%;
-      order: 1;
-    }
-    
-    /* Oculta todas las imágenes dentro del contenedor de imágenes */
-    .coverflow-carousel > .coverflow-container > .coverflow-item {
-      display: none !important;
-    }
-    
-    /* Muestra únicamente la imagen activa */
-    .coverflow-carousel > .coverflow-container > .coverflow-item.coverflow-active {
-      display: block !important;
-      width: 100%;
-      margin: 0 10px;
-    }
-    
-    /* Oculta los botones de PC (ya vienen con clases d-none d-md-block) y muestra el contenedor exclusivo para móvil */
-    .coverflow-nav-buttons {
-      order: 2;
-      margin-top: 10px;
-      display: flex !important;
-      justify-content: center;
-      gap: 20px;
-    }
-  }
+.carousel-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-items.transitioning {
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  margin: 0 15px;
+  flex: 1 0 auto;
+  width: 300px;
+  height: auto;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item.active {
+  transform: scale(1.1);
+  z-index: 2;
+  opacity: 1;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.carousel-item:not(.active) {
+  transform: scale(0.9);
+  opacity: 0.7;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.carousel-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.carousel-button-prev {
+  left: 10px;
+}
+
+.carousel-button-next {
+  right: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.obtained-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.card-slot {
+  position: relative;
+  width: 120px;
+  height: 160px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.card-slot.owned {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.card-image:hover {
+  transform: scale(1.1);
+}
+
+.continue-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+}

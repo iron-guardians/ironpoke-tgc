@@ -1,67 +1,149 @@
-import { useState } from "react";
-import "./carousel.css"; // Asegúrate de crear este archivo y agregar los estilos
+import React, { useState, useEffect } from "react";
+import "./carousel.css";
+import BoosterPack from "./booster-pack";
+import Modal from 'react-modal';
+import { openBoosterPack, addCards } from "../../services/api-service";
+import Card3DViewer from "../card-visualizer/3d-viewer"; // Import the 3D viewer component
 
-const Carousel = ({ images }) => {
-  // Índice activo que representa la imagen central
-  const [activeIndex, setActiveIndex] = useState(0);
+Modal.setAppElement('#root');
 
-  // Funciones para navegar
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1) >= 0 ? prev - 1 : images.length -1);
-    console.log(activeIndex);
-  };
+const Carousel = ({ boosterPacks }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [transitioning, setTransitioning] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedPack, setSelectedPack] = useState(null);
+    const [setCards, setSetCards] = useState([]);
+    const [is3DViewerOpen, setIs3DViewerOpen] = useState(false);
+    const [selectedCard, setSelectedCard] = useState(null);
 
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % images.length);
-    console.log(activeIndex);
-  };
-  
+    const prevSlide = () => {
+        if (transitioning) return;
+        setTransitioning(true);
+        setActiveIndex((prev) => (prev - 1 + boosterPacks.length) % boosterPacks.length);
+    };
 
-  // Calcula índices de las imágenes lateral izquierda y derecha
-  const prevIndex = (activeIndex - 1 + images.length) % images.length;
-  const nextIndex = (activeIndex + 1) % images.length;
+    const nextSlide = () => {
+        if (transitioning) return;
+        setTransitioning(true);
+        setActiveIndex((prev) => (prev + 1) % boosterPacks.length);
+    };
 
-  return (
-    <div className="coverflow-container  d-flex flex-column align-items-center justify-content-center">
-      <div className="coverflow-carousel d-flex align-items-center">
-        {/* Botón para ir a la imagen anterior (solo se muestra en PC) */}
-        <button className="btn btn-secondary d-none d-md-block coverflow-nav-button coverflow-nav-button-prev" onClick={prevSlide}>
-          Prev
-        </button>
-  
-        {/* Contenedor del carrusel */}
-        <div className="coverflow-container">
-          {/* Imagen lateral izquierda */}
-          <div className="coverflow-item coverflow-prev">
-            <img src={images[prevIndex]} alt={`Slide ${prevIndex}`} />
-          </div>
-          {/* Imagen central */}
-          <div className="coverflow-item coverflow-active">
-            <img src={images[activeIndex]} alt={`Slide ${activeIndex}`} />
-          </div>
-          {/* Imagen lateral derecha */}
-          <div className="coverflow-item coverflow-next">
-            <img src={images[nextIndex]} alt={`Slide ${nextIndex}`} />
-          </div>
+    useEffect(() => {
+        if (transitioning) {
+            setTimeout(() => {
+                setTransitioning(false);
+            }, 500);
+        }
+    }, [activeIndex, transitioning]);
+
+    const getDisplayPacks = () => {
+        const prevIndex = (activeIndex - 1 + boosterPacks.length) % boosterPacks.length;
+        const nextIndex = (activeIndex + 1) % boosterPacks.length;
+        return [boosterPacks[prevIndex], boosterPacks[activeIndex], boosterPacks[nextIndex]];
+    };
+
+    const handlePackClick = async (pack) => {
+        setSelectedPack(pack);
+        setIsModalOpen(true);
+
+        try {
+            const fetchedSetCards = await openBoosterPack(pack.id);
+            setSetCards(fetchedSetCards);
+
+            await addCards(fetchedSetCards);
+        } catch (error) {
+            console.error("Error fetching booster pack data:", error);
+        }
+    };
+
+    const handleCardClick = (card) => {
+        setSelectedCard(card);
+        setIs3DViewerOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedPack(null);
+        setSetCards([]);
+    };
+
+    const close3DViewer = () => {
+        setIs3DViewerOpen(false);
+        setSelectedCard(null);
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") close3DViewer();
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+    return (
+        <div className="carousel-container">
+            <div className="carousel">
+                <button
+                    className="carousel-button carousel-button-prev"
+                    onClick={prevSlide}
+                    aria-label="Previous slide"
+                    disabled={transitioning}
+                >
+                    <i className="fas fa-chevron-left"></i>
+                </button>
+
+                <div className={`carousel-items ${transitioning ? 'transitioning' : ''}`}>
+                    {getDisplayPacks().map((pack, index) => (
+                        <div 
+                            key={index} 
+                            className={`carousel-item ${index === 1 ? 'active' : ''}`}
+                        >
+                            <BoosterPack data={pack} onClick={() => handlePackClick(pack)} />
+                        </div>
+                    ))}
+                </div>
+
+                <button
+                    className="carousel-button carousel-button-next"
+                    onClick={nextSlide}
+                    aria-label="Next slide"
+                    disabled={transitioning}
+                >
+                    <i className="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            {isModalOpen && (
+                <div className="modal-overlay" onClick={(e) => e.target.classList.contains("modal-overlay") && closeModal()}>
+                    <div className="modal-content">
+                        <button className="close-button" onClick={closeModal}>✖</button>
+                        <h2>Booster pack open!</h2>
+                        <div className="obtained-cards-grid">
+                            {setCards.length > 0 ? (
+                                setCards.map((card, index) => (
+                                    <div key={index} className="card-slot owned" onClick={() => handleCardClick(card)}>
+                                        <img src={card.images.small} alt={`Card ${index}`} className="card-image" />
+                                    </div>
+                                ))
+                            ) : (
+                                <p>Loading cards...</p>
+                            )}
+                        </div>
+                        <button className="continue-button" onClick={closeModal}>Continue</button>
+                    </div>
+                </div>
+            )}
+
+            {is3DViewerOpen && selectedCard && (
+                <div className="modal-overlay" onClick={(e) => e.target.classList.contains("modal-overlay") && close3DViewer()}>
+                    <div className="modal-content">
+                        <button className="close-button" onClick={close3DViewer}>✖</button>
+                        <Card3DViewer imageUrl={selectedCard.images.large} />
+                    </div>
+                </div>
+            )}
         </div>
-  
-        {/* Botón para ir a la siguiente imagen (solo se muestra en PC) */}
-        <button className="btn btn-secondary d-none d-md-block coverflow-nav-button coverflow-nav-button-next" onClick={nextSlide}>
-          Next
-        </button>
-  
-        {/* Botones para vista móvil: se muestran solo en pantallas pequeñas */}
-        <div className="d-flex d-md-none coverflow-nav-buttons">
-          <button className="btn btn-secondary coverflow-nav-button coverflow-nav-button-prev" onClick={prevSlide}>
-            Prev
-          </button>
-          <button className="btn btn-secondary coverflow-nav-button coverflow-nav-button-next" onClick={nextSlide}>
-            Next
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
 
 export default Carousel;

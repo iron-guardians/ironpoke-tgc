@@ -9,3 +9,12 @@ module.exports.create = async (req, res, next) => {
         next(error);
     }
 };
+
+module.exports.getBoosterPacks = async (req, res, next) => {
+    try {
+        const boosterPacks = await BoosterPack.find();
+        res.status(200).json(boosterPacks);
+    } catch (error) {
+        next(error);
+    }
+};

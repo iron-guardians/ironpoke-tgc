@@ -1,50 +1,41 @@
 import { PageLayout } from "../layouts";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { profile } from "../../services/api-service";
+import { getBoosterPacks } from "../../services/api-service";
 import { Carousel } from "../carousel";
 
-
-const imageUrls = [
-  "https://ultimainformatica.com/3171113-thickbox_default/juego-de-cartas-pokemon-tcg-sv07-sleeved-booster-24-unidades-espanol.jpg",
-  "https://cdn.myshoptet.com/usr/www.pokepop.cz/user/shop/big/1209_p9505-sv06-3d-booster-wraps-dragapult-en-779x1427-43c231f.png?664b455c",
-  "https://cdn.myshoptet.com/usr/www.pokemagic.cz/user/shop/big/4010_sv09-3d-booster-wraps-standard-n-en-779x1427-43c231f.png?67a7af8e",
-  "https://cdn.myshoptet.com/usr/www.pokemagic.cz/user/shop/big/3901_p9508-sv08-3d-booster-wraps-pikachustellar-en-779x1427-43c231f.png?6706d166"// Agrega más imágenes según necesites
-];
-
 function Home() {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+    const [boosterPacks, setBoosterPacks] = useState([]);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userData = await profile();
-        setUser(userData);
-      } catch (error) {
-        navigate("/login");
-      }
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const fetchedBoosterPacks = await getBoosterPacks();
+                setBoosterPacks(fetchedBoosterPacks);
+                console.log(fetchedBoosterPacks);
+            } catch (error) {
+                navigate("/404");
+            }
+        };
 
-    fetchUser();
-  }, [navigate]);
-  if (!user) return <div>Loading...</div>;
+        fetchData();
+    }, [navigate]);
 
-
-  return (
-    
-      <div>
-      <PageLayout variant={"custom"}>
-        <div className="container  d-flex flex-column align-items-center justify-content-center">
-
-      <Carousel images={imageUrls} />
-      </div>
-        
-      </PageLayout>
-    </div>
-    ) 
- 
-  
+    return (
+        <PageLayout variant={"custom"}>
+            {boosterPacks.length > 0 ? (
+                <div className="container d-flex flex-column align-items-center justify-content-center">
+                    <h1 className="text-center">Booster Packs</h1>
+                    <Carousel boosterPacks={boosterPacks} />
+                </div>
+            ) : (
+                <div className="container d-flex flex-column align-items-center justify-content-center">
+                    <h1 className="text-center">No Booster Packs available</h1>
+                </div>
+            )}
+        </PageLayout>
+    );
 }
 
 export default Home;

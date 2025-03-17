@@ -11,6 +11,7 @@ const boosterPacks = require("../controllers/booster-packs.controller");
 const cardSets = require("../controllers/card-sets.controller");
 
 router.post("/booster-packs", boosterPacks.create);
+router.get("/booster-packs", boosterPacks.getBoosterPacks);
 
 router.post("/cards", cards.storeAllCards);
 router.get("/cards", cards.getCards);
