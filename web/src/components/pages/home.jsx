@@ -1,4 +1,5 @@
 import { PageLayout } from "../layouts";
+import { ImagenCarga } from "../imagenCarga";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { profile } from "../../services/api-service";
@@ -28,7 +29,10 @@ function Home() {
 
     fetchUser();
   }, [navigate]);
-  if (!user) return <div>Loading...</div>;
+  if (!user){
+    return <ImagenCarga />
+
+  } 
 
 
   return (

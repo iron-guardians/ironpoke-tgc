@@ -1,0 +1,32 @@
+.loading-container {
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+  }
+  
+  .loading-container img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    transition: left 0.3s ease;
+    animation: fadeScale 1s forwards;
+  }
+  
+  /* Animación: inicia pequeña y opaca, crece hasta ser visible y luego se reduce y desvanece */
+  @keyframes fadeScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
