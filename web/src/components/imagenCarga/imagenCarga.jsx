@@ -1,3 +1,5 @@
+
+
 import { useEffect, useRef } from 'react';
 import './imagenCarga.css'; // Importa el CSS exclusivo para este componente
 

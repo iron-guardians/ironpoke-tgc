@@ -45,7 +45,7 @@
 }
 
 .carousel-item.active {
-  transform: scale(1.1);
+  transform: scale(0.9);
   z-index: 2;
   opacity: 1;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

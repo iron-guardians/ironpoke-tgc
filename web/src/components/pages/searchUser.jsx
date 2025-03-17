@@ -5,6 +5,7 @@ import { SearchBar } from "../searchUsers";
 import { UserCards } from "../searchUsers";
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { ImagenCarga } from "../imagenCarga";
 
 
 import "./searchUser.css";
@@ -57,7 +58,9 @@ function SearchUser() {
   return (   
     <PageLayout>
       { !user ? (
-  <div>Loading...</div>
+      <div>
+        <ImagenCarga />
+      </div>
 ) : 
       <div className="container-fluid px-0">
         <div className="row position-sticky top-0 bg-white z-index-1000">
@@ -66,7 +69,7 @@ function SearchUser() {
           </div>
         </div>
 
-        <div className="scrollable-content p-3">
+        <div className="scrollable-content p-3 m-5">
           <div className="row">
             {filteredUsers.map((user) => (
               <div key={user.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">

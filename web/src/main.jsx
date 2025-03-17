@@ -10,11 +10,11 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
       <AuthProvider>
-        <NavBar />
-        <App />
-        <footer className="custom-header-bg text-white text-center py-3">
-          <small>&copy; 2025 Pokemon API. Todos los derechos reservados. IronGuardians</small>
-        </footer>
+        <div className="app-container">
+          
+          <App />
+          
+        </div>
       </AuthProvider>
     </Router>
   </StrictMode>

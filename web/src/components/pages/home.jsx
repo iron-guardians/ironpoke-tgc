@@ -26,7 +26,7 @@ function Home() {
         <PageLayout variant={"custom"}>
             {boosterPacks.length > 0 ? (
                 <div className="container d-flex flex-column align-items-center justify-content-center">
-                    <h1 className="text-center">Booster Packs</h1>
+                    <h1 className="text-center m-5 p-2">Booster Packs</h1>
                     <Carousel boosterPacks={boosterPacks} />
                 </div>
             ) : (

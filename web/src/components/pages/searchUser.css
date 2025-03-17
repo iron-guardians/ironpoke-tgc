@@ -1,11 +1,11 @@
 .search-container {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    padding: 100px;
     border-radius: 8px;
   }
   
   .scrollable-content {
-    max-height: calc(100vh - 150px); /* Ajusta la altura según sea necesario */
+    max-height: calc(100vh - 150px); 
     overflow-y: auto;
   }
   
