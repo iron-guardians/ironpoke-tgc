@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { profile, getUser, getUserCards } from "../../services/api-service";
 import "./profile.css";
 import { PageLayout } from "../layouts";
+import { ImagenCarga } from "../imagenCarga";
 
 function ProfilePage() {
     const { userId } = useParams();
@@ -12,6 +13,17 @@ function ProfilePage() {
     const [cardSets, setCardSets] = useState([]);
     const isOwnProfile = userId === "me";
     const navigate = useNavigate();
+    const [showNoSets, setShowNoSets] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowNoSets(true);
+            setIsLoading(false);
+        }, 4000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -71,7 +83,6 @@ function ProfilePage() {
                     <div className="profile-header-wrapper">
                         <ProfileHeader user={user} />
                     </div>
-
                     {/* Scrollable Card Collection */}
                     <div className="profile-content">
                         <div className="profile-card-sets-wrapper">
@@ -88,17 +99,23 @@ function ProfilePage() {
                                     ))}
                                 </div>
                             ) : (
-                                <div className="no-cards-message">No card sets available.</div>
+                                <div className="no-cards-message">
+                                     {isLoading && <ImagenCarga />}
+                                    {showNoSets && (
+                                        <img className="noSets" src="/noSets.png" alt="No cards set available"  />
+                                    )}
+                                </div>
                             )}
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className="loading-container">
-                    <div className="spinner">Loading...</div>
-                </div>
+            <div>
+                <ImagenCarga />
+            </div>
             )}
         </PageLayout>
+     
     );
 }
 

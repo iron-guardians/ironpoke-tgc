@@ -114,3 +114,18 @@
   font-family: 'Roboto', sans-serif bold;
 }
 
+.noSets {
+  display: block;
+  width: 100%;
+  max-width: 300px; /* Máximo en pantallas grandes */
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .noSets {
+    max-width: 90%; /* Ajuste para dispositivos móviles */
+  }
+}

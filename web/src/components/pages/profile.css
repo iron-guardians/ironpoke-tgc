@@ -88,3 +88,18 @@
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }
+
+.loading-container {
+    position: relative;
+    width: 100%;       /* Use full available width */
+    height: 100px;     /* Set a fixed height to center the pokeballs; adjust as needed */
+    margin: 5px;    /* Center the container horizontally */
+    overflow: visible; /* Allow images to extend outside the container if needed */
+  }
+  
+  .loading-container img {
+    transition: left 0.3s ease;
+    margin: 20px;
+    width: 50px;  /* Fixed width for the pokeball image */
+    height: 50px; /* Fixed height for the pokeball image */
+  }
