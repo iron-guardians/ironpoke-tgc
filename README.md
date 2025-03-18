@@ -36,4 +36,9 @@ Once the application is running, follow these steps to enjoy IronPoke TGC:
 - **Database:** MongoDB for storing user collections and card data
 - **Build Tool:** Vite for optimized performance
 
+📱 Mobile-First, Always!
+IronPoke TGC isn't just a web app—it's built for mobile users. Whether you're swiping through your collection or zooming into a 3D card, the entire experience is crafted for smooth mobile gameplay.
+
+🎴 Start your collection today and experience Pokémon-inspired card collecting in a whole new way!
+
 IronPoke TGC offers an exciting digital card collecting experience, bringing Pokémon-inspired cards to life with modern web technologies!
