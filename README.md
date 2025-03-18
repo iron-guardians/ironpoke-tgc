@@ -1,6 +1,6 @@
-# IronPoke TGC
+# IronPoke TGC – Designed for Mobile! 📱
 
-**IronPoke TGC** is a digital collectible card experience inspired by classic trading card games. This project allows users to open virtual booster packs, visualize their cards in **3D**, and explore the collections of other players, creating an immersive and engaging card-collecting platform.
+**IronPoke TGC** is a mobile-first digital collectible card game inspired by classic trading card experiences. This project allows users to open virtual booster packs, visualize their cards in **3D**, and explore the collections of other players, creating an immersive and engaging card-collecting platform.
 
 ## Features
 
